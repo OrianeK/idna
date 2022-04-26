@@ -395,3 +395,9 @@ def decode(s: Union[str, bytes, bytearray], strict: bool = False, uts46: bool = 
     if trailing_dot:
         result.append('')
     return '.'.join(result)
+
+try:
+        if isinstance(s, (bytes, bytearray)):
+            s = s.decode('ascii')
+    except UnicodeDecodeError:
+        raise IDNAError('Invalid ASCII in A-label')
